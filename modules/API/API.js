@@ -74,6 +74,7 @@ import { muteAllParticipants } from '../../react/features/video-menu/actions';
 import { setVideoQuality } from '../../react/features/video-quality';
 import VirtualBackgroundDialog from '../../react/features/virtual-background/components/VirtualBackgroundDialog';
 import { getJitsiMeetTransport } from '../transport';
+import { setFullScreen } from '../../react/features/toolbox/actions.web';
 
 import { API_ID, ENDPOINT_TEXT_MESSAGE_NAME } from './constants';
 
@@ -531,6 +532,10 @@ function initCommands() {
         },
         'toggle-virtual-background': () => {
             APP.store.dispatch(toggleDialog(VirtualBackgroundDialog));
+        },
+        'toggle-full-screen': () => {
+            const { fullScreen } = APP.store.getState()['features/toolbox'];
+            APP.store.dispatch(setFullScreen(!fullScreen));
         }
     };
     transport.on('event', ({ data, name }) => {
